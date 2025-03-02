@@ -1,74 +1,95 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from "react";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
-export default function HomeScreen() {
+const App = () => {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>ANIMALES</Text>
+          <TouchableOpacity style={styles.startButton}>
+            <Text style={styles.startText}>START ▶</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Category title="DULCES - SWEETS" color="#A54444" />
+        <Category title="COMIDA - FOOD" color="#222" />
+        <Category title="Palabras elementales - Elemental words" color="#2A5EA5" />
+      </ScrollView>
+    </View>
   );
-}
+};
+
+type CategoryProps = {
+  title: string;
+  color: string;
+};
+
+const Category: React.FC<CategoryProps> = ({ title, color }) => (
+  <View style={styles.categoryWrapper}>
+    <Text style={styles.categoryTitle}>{title}</Text>
+    <View style={styles.categoryRow}>
+      <TouchableOpacity style={[styles.categoryBox, { backgroundColor: color }]} />
+      <TouchableOpacity style={[styles.categoryBox, { backgroundColor: color }]} />
+    </View>
+  </View>
+);
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#0057FF",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  header: {
+    padding: 20,
+    alignItems: "center",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  headerTitle: {
+    color: "white",
+    fontSize: 22,
+    fontWeight: "bold",
+  },
+  startButton: {
+    backgroundColor: "#00F7FF",
+    padding: 10,
+    borderRadius: 20,
+    marginTop: 10,
+    paddingHorizontal: 20,
+  },
+  startText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  categoryWrapper: {
+    margin: 10,
+  },
+  categoryTitle: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  categoryRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  categoryBox: {
+    flex: 1,
+    height: 80,
+    margin: 5,
+  },
+  navbar: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    backgroundColor: "#001A4D",
+    paddingVertical: 10,
+  },
+  navItem: {
+    width: 40,
+    height: 40,
+    backgroundColor: "white",
+    borderRadius: 5,
   },
 });
+
+export default App;
