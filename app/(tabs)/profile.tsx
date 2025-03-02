@@ -1,27 +1,22 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Asegúrate de instalar expo/vector-icons
+import { Ionicons } from "@expo/vector-icons"; 
 
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
-      {/* Encabezado */}
       <View style={styles.header}>
         <Text style={styles.profileText}>Perfil</Text>
         <TouchableOpacity style={styles.settingsButton}>
           <Ionicons name="settings-outline" size={24} color="white" />
         </TouchableOpacity>
       </View>
-
-      {/* Imagen de Perfil */}
       <View style={styles.profileContainer}>
         <Image
-          source={{ uri: "https://via.placeholder.com/50" }} // Reemplaza con una imagen real
+          source={{ uri: "https://via.placeholder.com/50" }} 
           style={styles.profileImage}
         />
       </View>
-
-      {/* Lista de información */}
       <View style={styles.infoContainer}>
         <InfoRow label="Idioma" value="Inglés" />
         <InfoRow label="Nivel de idioma" value="Principiante" />
@@ -32,7 +27,6 @@ const ProfileScreen = () => {
   );
 };
 
-// Componente para filas de información
 const InfoRow = ({ label, value }) => (
   <View style={styles.infoRow}>
     <Text style={styles.infoLabel}>{label}</Text>
@@ -40,7 +34,7 @@ const InfoRow = ({ label, value }) => (
   </View>
 );
 
-// Estilos
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
