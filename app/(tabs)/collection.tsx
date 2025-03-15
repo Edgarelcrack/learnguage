@@ -1,74 +1,84 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
-export default function HomeScreen() {
+const CollectionScreen = () => {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+    
+    <View style={styles.container}>
+      
+      
+      <View style={styles.searchContainer}>
+        <Ionicons name="search" size={20} color="black" style={styles.icon} />
+        <TextInput
+          placeholder="BUSCAR PALABRA"
+          placeholderTextColor="white"
+          style={styles.searchInput}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">hola a todos!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">paso 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">paso 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">paso 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      </View>
+
+      
+      <TouchableOpacity style={styles.categoryButton}>
+        <Text style={styles.categoryText}>ALIMENTOS</Text>
+        <Ionicons name="chevron-down" size={20} color="white" />
+      </TouchableOpacity>
+
+     
+      <View style={styles.contentArea}></View>
+
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: '#491778',
+    padding: 20,
+    
+  },
+  searchContainer: {
     flexDirection: 'row',
+    backgroundColor: '#572F87',
+    borderRadius: 20,
     alignItems: 'center',
-    gap: 8,
+    padding: 10,
+    marginBottom: 20,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  icon: {
+    marginLeft: 5,
+    marginRight: 10,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  searchInput: {
+    flex: 1,
+    color: 'white',
+    fontSize: 16,
+  },
+  categoryButton: {
+    flexDirection: 'row',
+    backgroundColor: '#26D5B4',
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 15,
+    marginBottom: 20,
+  },
+  categoryText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  contentArea: {
+    flex: 1,
+  },
+  navBar: {
+    flexDirection: 'row',
+    backgroundColor: '#002D5B',
+    paddingVertical: 10,
+    justifyContent: 'space-around',
+  },
+  navButton: {
+    padding: 10,
   },
 });
+
+export default CollectionScreen;

@@ -38,7 +38,7 @@ const InfoRow = ({ label, value }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0057FF",
+    backgroundColor: "#491778",
     paddingTop: 50,
   },
   header: {

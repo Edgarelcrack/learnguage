@@ -38,7 +38,7 @@ const Category: React.FC<CategoryProps> = ({ title, color }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0057FF",
+    backgroundColor: "#491778",
   },
   header: {
     padding: 20,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   startButton: {
-    backgroundColor: "#00F7FF",
+    backgroundColor: "#E78935",
     padding: 10,
     borderRadius: 20,
     marginTop: 10,
