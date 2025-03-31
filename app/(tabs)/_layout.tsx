@@ -56,6 +56,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <Ionicons size={28} name="person" color={color} />,
         }}
       />
+      
     </Tabs>
   );
 }
