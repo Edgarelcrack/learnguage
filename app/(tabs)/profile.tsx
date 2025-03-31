@@ -1,13 +1,18 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; 
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const ProfileScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.profileText}>Perfil</Text>
-        <TouchableOpacity style={styles.settingsButton}>
+        <TouchableOpacity 
+          style={styles.settingsButton} 
+          onPress={() => navigation.navigate("Configuracion" as never)}>
           <Ionicons name="settings-outline" size={24} color="white" />
         </TouchableOpacity>
       </View>
@@ -27,13 +32,12 @@ const ProfileScreen = () => {
   );
 };
 
-const InfoRow = ({ label, value }) => (
+const InfoRow: React.FC<{ label: string; value: string }> = ({ label, value }) => (
   <View style={styles.infoRow}>
     <Text style={styles.infoLabel}>{label}</Text>
     <Text style={styles.infoValue}>{value}</Text>
   </View>
 );
-
 
 const styles = StyleSheet.create({
   container: {

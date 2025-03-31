@@ -1,23 +1,18 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import ExerciseScreen from "./ExerciseScreen"; 
 
-import { useNavigation } from "@react-navigation/native";
-
-const App = () => {
-  const navigation = useNavigation();
-  
+const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>ANIMALES</Text>
-          <TouchableOpacity
-            style={styles.startButton}
-            onPress={() => navigation.navigate("ExerciseScreen" as never)}
-          >
+          <TouchableOpacity style={styles.startButton} onPress={() => navigation.navigate("Exercise")}>
             <Text style={styles.startText}>START ▶</Text>
           </TouchableOpacity>
-
         </View>
 
         <Category title="DULCES - SWEETS" color="#A54444" />
@@ -28,12 +23,20 @@ const App = () => {
   );
 };
 
-type CategoryProps = {
-  title: string;
-  color: string;
+const Stack = createStackNavigator();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Exercise" component={ExerciseScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 };
 
-const Category: React.FC<CategoryProps> = ({ title, color }) => (
+const Category = ({ title, color }) => (
   <View style={styles.categoryWrapper}>
     <Text style={styles.categoryTitle}>{title}</Text>
     <View style={styles.categoryRow}>
@@ -85,18 +88,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 80,
     margin: 5,
-  },
-  navbar: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    backgroundColor: "#001A4D",
-    paddingVertical: 10,
-  },
-  navItem: {
-    width: 40,
-    height: 40,
-    backgroundColor: "white",
-    borderRadius: 5,
   },
 });
 

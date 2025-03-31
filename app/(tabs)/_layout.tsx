@@ -1,62 +1,64 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
-
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import Feather from '@expo/vector-icons/Feather';
-
-
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { Ionicons} from '@expo/vector-icons';
-import { View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { Animated } from 'react-native';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const tintColor = Colors[colorScheme ?? 'light'].tint;
+
+  const screens = [
+    { name: 'index', title: 'Home', icon: 'grid' as const },
+    { name: 'explore', title: 'Chat', icon: 'chatbubble' as const },
+    { name: 'collection', title: 'Collection', icon: 'folder' as const },
+    { name: 'profile', title: 'Profile', icon: 'person' as const },
+  ];
+  
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: tintColor,
+        tabBarInactiveTintColor: 'gray',
         headerShown: false,
         tabBarStyle: {
           backgroundColor: '#28113D',
           paddingVertical: 10,
           height: 60,
+          borderTopWidth: 1,
+          borderTopColor: 'rgba(255, 255, 255, 0.2)',
         },
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name="grid" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Chat',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name="chatbubble" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="collection"
-        options={{
-          title: 'Collection',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name="folder" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Profile',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name="person" color={color} />,
-        }}
-      />
-      
+        tabBarLabelStyle: {
+          fontSize: 12,
+        },
+      }}
+    >
+      {screens.map(({ name, title, icon }) => (
+        <Tabs.Screen
+          key={name}
+          name={name}
+          options={{
+            title,
+            tabBarIcon: ({ color, focused }) => {
+              const animatedScale = new Animated.Value(focused ? 1.2 : 1);
+              
+              Animated.timing(animatedScale, {
+                toValue: focused ? 1.2 : 1,
+                duration: 200,
+                useNativeDriver: true,
+              }).start();
+
+              return (
+                <Animated.View style={{ transform: [{ scale: animatedScale }] }}>
+                  <Ionicons size={28} name={icon} color={color} />
+                </Animated.View>
+              );
+            },
+          }}
+        />
+      ))}
     </Tabs>
   );
 }
