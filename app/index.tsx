@@ -27,7 +27,7 @@ export default function Login() {
                 placeholder="Contraseña"
             />
 
-            <TouchableOpacity style={styles.loginButton} onPress={() => router.back()}>
+            <TouchableOpacity style={styles.loginButton} onPress={() => router.push("/(tabs)")}>
                 <Text style={styles.loginText}>Iniciar sesion</Text>
                 <Ionicons name="arrow-forward" size={20} color="#fff" />
             </TouchableOpacity>
@@ -43,7 +43,7 @@ export default function Login() {
                 <Text style={styles.createAccount}>Crear cuenta</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[{marginTop: 30}]}onPress={() => router.push("/register")}>
+            <TouchableOpacity style={[{marginTop: 30}]}onPress={() => router.push("/recover")}>
                 <Text style={styles.createAccount}>Olvidaste tu Contraseña?</Text>
             </TouchableOpacity>
             
@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
     text: {
         color: "#fff",
         fontSize: 16,
-        color: "#a5a5a5",
         marginTop: 10
     },
     loginButton: {
@@ -95,15 +94,13 @@ const styles = StyleSheet.create({
         marginVertical: 25,
         width: "80%",
         fontSize: 16,
-        placeholderTextColor: "#a5a5a5",
     },
     inputPassword: {
         backgroundColor: "#fff",
         padding: 15,
-        borderRasius: 5,
+        borderRadius: 5,
         width: "80%",
         fontSize: 16,
-        placeholderTextColor: "#a5a5a5",
     },
     createAccount: {
         color: "#fff",
