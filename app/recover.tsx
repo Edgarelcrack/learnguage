@@ -35,7 +35,7 @@ export default function RecoverPassword() {
                 <Ionicons name="mail" size={20} color="#fff" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ marginTop: 20 }} onPress={() => router.push("/login")}>
+            <TouchableOpacity style={{ marginTop: 20 }} onPress={() => router.back()}>
                 <Text style={styles.backToLogin}>Volver al inicio de sesión</Text>
             </TouchableOpacity>
         </View>

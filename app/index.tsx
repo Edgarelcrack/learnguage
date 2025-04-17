@@ -1,12 +1,40 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert} from "react-native";
 import { Ionicons } from "@expo/vector-icons"; 
 import { useRouter } from "expo-router";
+// Firebase imports
+import { auth} from '../app/firebaseconfig';
+import {signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function Login() {
     const router = useRouter();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+
+    const signIn = async () => {
+
+        if (!email || !password) {
+            Alert.alert("Ha ocurrido un error", "Completa todos los campos");
+            return;
+        }
+
+        try {
+            
+            await signInWithEmailAndPassword(auth, email, password);
+            router.push("/(tabs)");
+
+        } catch (error: any) {
+            let errorMessage = error.message;
+            if (error.code === 'auth/user-not-found') {
+                errorMessage = "El correo electrónico no está registrado";
+            } else if (error.code === 'auth/wrong-password') {
+                errorMessage = "La contraseña es incorrecta";
+            }
+            Alert.alert("Error", errorMessage);
+        }
+    
+    }
+
 
     return (
         <View style={[styles.container]}>
@@ -27,7 +55,7 @@ export default function Login() {
                 placeholder="Contraseña"
             />
 
-            <TouchableOpacity style={styles.loginButton} onPress={() => router.push("/(tabs)")}>
+            <TouchableOpacity style={styles.loginButton} onPress={signIn}>
                 <Text style={styles.loginText}>Iniciar sesion</Text>
                 <Ionicons name="arrow-forward" size={20} color="#fff" />
             </TouchableOpacity>
@@ -43,7 +71,9 @@ export default function Login() {
                 <Text style={styles.createAccount}>Crear cuenta</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[{marginTop: 30}]}onPress={() => router.push("/recover")}>
+            <TouchableOpacity style={[{marginTop: 30}]}
+            onPress={() => router.push("/recover")}>
+                
                 <Text style={styles.createAccount}>Olvidaste tu Contraseña?</Text>
             </TouchableOpacity>
             
