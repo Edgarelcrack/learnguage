@@ -1,11 +1,20 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
-
 import { useNavigation } from "@react-navigation/native";
+import sweets1 from '../data/sweets1Data';
+import sweets2 from '../data/sweets2Data';
+import fastFood from '../data/fastFoodData';
+import healthyFood from '../data/healthyFoodData';
+import basicWords from '../data/elementalWords1Data';
+import basicWords2 from '../data/elementalWords2Data';
+import Ecolors from '../data/Colors';
+
+import { RootStackParamList } from './types'; 
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const App = () => {
-  const navigation = useNavigation();
-  
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -13,35 +22,73 @@ const App = () => {
           <Text style={styles.headerTitle}>ANIMALES</Text>
           <TouchableOpacity
             style={styles.startButton}
-            onPress={() => navigation.navigate("ExerciseScreen" as never)}
+            onPress={() => navigation.navigate("ExerciseScreen", { data: Ecolors })}
           >
             <Text style={styles.startText}>START ▶</Text>
           </TouchableOpacity>
-
         </View>
 
-        <Category title="DULCES - SWEETS" color="#A54444" />
-        <Category title="COMIDA - FOOD" color="#222" />
-        <Category title="Palabras elementales - Elemental words" color="#2A5EA5" />
+        {/* DULCES */}
+        <View style={styles.categoryWrapper}>
+          <Text style={styles.categoryTitle}>DULCES - SWEETS</Text>
+          <View style={styles.categoryRow}>
+            <TouchableOpacity
+              style={[styles.categoryBox, { backgroundColor: "#A54444" }]}
+              onPress={() => navigation.navigate("ExerciseScreen", { data: sweets1 })}
+            >
+              <Text style={styles.boxText}>Dulces 1</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+              style={[styles.categoryBox, { backgroundColor: "#A54444" }]}
+              onPress={() => navigation.navigate("ExerciseScreen", { data: sweets2 })}
+            >
+              <Text style={styles.boxText}>Dulces 2</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* COMIDA */}
+        <View style={styles.categoryWrapper}>
+          <Text style={styles.categoryTitle}>COMIDA - FOOD</Text>
+          <View style={styles.categoryRow}>
+            <TouchableOpacity
+              style={[styles.categoryBox, { backgroundColor: "#222" }]}
+              onPress={() => navigation.navigate("ExerciseScreen", { data: fastFood })}
+            >
+              <Text style={styles.boxText}>Comida rapida</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.categoryBox, { backgroundColor: "#222" }]}
+              onPress={() => navigation.navigate("ExerciseScreen", { data: healthyFood })}
+            >
+              <Text style={styles.boxText}>Comida saludable</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* PALABRAS ELEMENTALES */}
+        <View style={styles.categoryWrapper}>
+          <Text style={styles.categoryTitle}>Palabras elementales - Elemental words</Text>
+          <View style={styles.categoryRow}>
+            <TouchableOpacity
+              style={[styles.categoryBox, { backgroundColor: "#2A5EA5" }]}
+              onPress={() => navigation.navigate("ExerciseScreen", { data: basicWords })}
+            >
+              <Text style={styles.boxText}>Elemental 1</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.categoryBox, { backgroundColor: "#2A5EA5" }]}
+              onPress={() => navigation.navigate("ExerciseScreen", { data: basicWords2 })}
+            >
+              <Text style={styles.boxText}>Elemental 2</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </ScrollView>
     </View>
   );
 };
-
-type CategoryProps = {
-  title: string;
-  color: string;
-};
-
-const Category: React.FC<CategoryProps> = ({ title, color }) => (
-  <View style={styles.categoryWrapper}>
-    <Text style={styles.categoryTitle}>{title}</Text>
-    <View style={styles.categoryRow}>
-      <TouchableOpacity style={[styles.categoryBox, { backgroundColor: color }]} />
-      <TouchableOpacity style={[styles.categoryBox, { backgroundColor: color }]} />
-    </View>
-  </View>
-);
 
 const styles = StyleSheet.create({
   container: {
@@ -85,18 +132,14 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 80,
     margin: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
   },
-  navbar: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    backgroundColor: "#001A4D",
-    paddingVertical: 10,
-  },
-  navItem: {
-    width: 40,
-    height: 40,
-    backgroundColor: "white",
-    borderRadius: 5,
+  boxText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
 

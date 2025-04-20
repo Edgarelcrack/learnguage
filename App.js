@@ -2,7 +2,9 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import ExerciseScreen from "./ExerciseScreen"; 
+import ExerciseScreen from "./ExerciseScreen";
+
+
 
 const HomeScreen = ({ navigation }) => {
   return (
@@ -31,6 +33,9 @@ const App = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Exercise" component={ExerciseScreen} />
+        <Stack.Screen name="SweetsExercise" component={SweetsExercise} />
+        <Stack.Screen name="FoodExercise" component={FoodExercise} />
+        <Stack.Screen name="WordsExercise" component={WordsExercise} />
       </Stack.Navigator>
     </NavigationContainer>
   );
