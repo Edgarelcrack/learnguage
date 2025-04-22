@@ -1,10 +1,45 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { auth, db } from "../firebaseconfig"; 
+import { doc, getDoc } from "firebase/firestore";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
+  const [userData, setUserData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          const docRef = doc(db, "users", user.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            setUserData(docSnap.data());
+          } else {
+            console.log("No hay datos del usuario en Firestore.");
+          }
+        }
+      } catch (error) {
+        console.error("Error al cargar datos del usuario:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUserData();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={[styles.container, { justifyContent: "center", alignItems: "center" }]}>
+        <ActivityIndicator size="large" color="#fff" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -18,15 +53,17 @@ const ProfileScreen = () => {
       </View>
       <View style={styles.profileContainer}>
         <Image
-          source={{ uri: "https://via.placeholder.com/50" }} 
+          source={{ uri: userData?.foto || "https://via.placeholder.com/50" }} 
           style={styles.profileImage}
         />
       </View>
       <View style={styles.infoContainer}>
-        <InfoRow label="Idioma" value="Inglés" />
-        <InfoRow label="Nivel de idioma" value="Principiante" />
-        <InfoRow label="Racha actual" value="0" />
-        <InfoRow label="Mejor racha" value="0" />
+      <InfoRow label="Nombre" value={`${userData?.name || ""} ${userData?.lastName || ""}`} />
+      <InfoRow label="Correo" value={userData?.email || "No disponible"} />
+      <InfoRow label="Edad" value={userData?.age || "No disponible"} />
+        <InfoRow label="Nivel de idioma" value={userData?.nivel || "Principiante"} />
+        <InfoRow label="Racha actual" value={`${userData?.rachaActual || 0}`} />
+        <InfoRow label="Mejor racha" value={`${userData?.mejorRacha || 0}`} />
       </View>
     </View>
   );
