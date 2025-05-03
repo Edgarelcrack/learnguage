@@ -1,6 +1,8 @@
 import React, { useReducer } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { auth, db } from '../app/firebaseconfig';
+import { doc, setDoc } from 'firebase/firestore';
 
 const initialState = {
   currentIndex: 0,
@@ -40,8 +42,38 @@ const WordFillExercise = () => {
   const { currentIndex, correctStreak, completed, feedback, fadeAnim } = state;
   const current = exercises[currentIndex];
 
+
+  const saveLearnedWord = async (word) => {
+    try {
+      const user = auth.currentUser; 
+      if (!user) {
+        console.error('No hay un usuario autenticado.');
+        return;
+      }
+      const userDocRef = doc(db, 'users', user.uid);
+      await setDoc(
+        userDocRef,
+        {
+          learnedWords: {
+            [word]: true, 
+          },
+        },
+        { merge: true } 
+      );
+
+      console.log(`Palabra "${word}" guardada como aprendida.`);
+    } catch (error) {
+      console.error('Error al guardar la palabra aprendida:', error);
+    }
+  };
+  
+
   const handleAnswer = (selected) => {
     const isCorrect = selected === current.correctWord;
+    if (isCorrect) {
+      saveLearnedWord(current.correctWord);
+    }
+
     dispatch({
       type: 'ANSWER',
       payload: {

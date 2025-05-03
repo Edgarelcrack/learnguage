@@ -1,30 +1,34 @@
 const basicWords = [
-    {
-      sentence: "You can ___ with a pencil.",
-      options: ["write", "run", "sing", "jump"],
-      correctWord: "write",
-    },
-    {
-      sentence: "The baby is very ___.",
-      options: ["small", "fast", "old", "tall"],
-      correctWord: "small",
-    },
-    {
-      sentence: "We ___ to school every day.",
-      options: ["go", "sleep", "eat", "paint"],
-      correctWord: "go",
-    },
-    {
-      sentence: "My hands are ___ after washing.",
-      options: ["wet", "loud", "slow", "high"],
-      correctWord: "wet",
-    },
-    {
-      sentence: "The ball can ___ high in the air.",
-      options: ["bounce", "draw", "read", "walk"],
-      correctWord: "bounce",
-    },
-  ];
-  
-  export default basicWords;
+  {
+    sentence: "You can write with a ___.",
+    options: ["pencil", "shoe", "plate", "spoon"],
+    correctWord: "pencil",
+  },
+  {
+    sentence: "The ___ is sleeping in the crib.",
+    options: ["baby", "book", "ball", "plant"],
+    correctWord: "baby",
+  },
+  {
+    sentence: "I take my ___ to school every day.",
+    options: ["backpack", "mirror", "towel", "television"],
+    correctWord: "backpack",
+  },
+  {
+    sentence: "Dry your hands with a ___.",
+    options: ["towel", "hat", "brush", "pen"],
+    correctWord: "towel",
+  },
+  {
+    sentence: "He kicked the ___ across the field.",
+    options: ["ball", "chair", "clock", "cup"],
+    correctWord: "ball",
+  },
+];
+
+export default basicWords;
+
+
+
+
   

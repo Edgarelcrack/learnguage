@@ -1,28 +1,28 @@
 const sweets1 = [
   {
-    sentence: "Chocolate is ___ and delicious.",
-    options: ["sweet", "salty", "bitter", "spicy"],
-    correctWord: "sweet",
+    sentence: "The ___ melts in your mouth and brings a smile to your face.",
+    options: ["chocolate", "caramel", "marzipan", "gum"],
+    correctWord: "chocolate",
   },
   {
-    sentence: "Candy is often ___ in color.",
-    options: ["bright", "dark", "dull", "gray"],
-    correctWord: "bright",
+    sentence: "The ___ is a candy that stretches and makes chewing fun.",
+    options: ["gum", "caramel", "lollipop", "marzipan"],
+    correctWord: "gum",
   },
   {
-    sentence: "Lollipops are ___ on a stick.",
-    options: ["round", "square", "triangular", "flat"],
-    correctWord: "round",
+    sentence: "The ___ is a candy that usually comes on a stick and brightens your day.",
+    options: ["lollipop", "chocolate", "caramel", "gummy"],
+    correctWord: "lollipop",
   },
   {
-    sentence: "Marshmallows are ___ and fluffy.",
-    options: ["soft", "hard", "sticky", "dry"],
-    correctWord: "soft",
+    sentence: "The ___ is a sweet treat made from almonds and sugar, perfect for celebrations.",
+    options: ["marzipan", "gum", "caramel", "lollipop"],
+    correctWord: "marzipan",
   },
   {
-    sentence: "Gummies are ___ and chewy.",
-    options: ["colorful", "crispy", "bitter", "dry"],
-    correctWord: "colorful",
+    sentence: "The ___ are colorful candies of various shapes that bring joy to everyone.",
+    options: ["gummies", "chocolates", "lollipops", "caramels"],
+    correctWord: "gummies",
   },
 ];
 

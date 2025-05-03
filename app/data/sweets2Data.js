@@ -1,28 +1,28 @@
 const sweets2 = [
   {
-    sentence: "Ice cream is ___ on a hot day.",
-    options: ["refreshing", "warm", "dry", "boring"],
-    correctWord: "refreshing",
+    sentence: "___ is a dessert made with a crust and a creamy cheese filling.",
+    options: ["Cheesecake", "Brownie", "Cupcake", "Donut"],
+    correctWord: "Cheesecake",
   },
   {
-    sentence: "Cupcakes are often topped with ___ frosting.",
-    options: ["colorful", "plain", "spicy", "bitter"],
-    correctWord: "colorful",
+    sentence: "___ is a hard candy on a stick, often colorful.",
+    options: ["Candy cane", "Toffee", "Gumdrop", "Cookie"],
+    correctWord: "Candy cane",
   },
   {
-    sentence: "Donuts are ___ and have a hole in the middle.",
-    options: ["round", "square", "flat", "triangular"],
-    correctWord: "round",
+    sentence: "___ are soft, fluffy, and often roasted over a fire.",
+    options: ["Marshmallows", "Caramels", "Taffy", "Macarons"],
+    correctWord: "Marshmallows",
   },
   {
-    sentence: "Macarons are ___ and come in many flavors.",
-    options: ["delicate", "hard", "bitter", "dry"],
-    correctWord: "delicate",
+    sentence: "___ are small, colorful, and often used to decorate cakes or cookies.",
+    options: ["Sprinkles", "Caramels", "Taffy", "Macarons"],
+    correctWord: "Sprinkles",
   },
   {
-    sentence: "Brownies are ___ and chocolatey.",
-    options: ["soft", "crispy", "bitter", "dry"],
-    correctWord: "soft",
+    sentence: "___ are baked desserts often filled with fruits like apples or cherries.",
+    options: ["Pies", "Cakes", "Muffins", "Tarts"],
+    correctWord: "Pies",
   },
 ];
 

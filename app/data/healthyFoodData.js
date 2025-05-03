@@ -1,28 +1,28 @@
 const healthyFood = [
   {
-    sentence: "Salads are made with fresh ___.",
-    options: ["vegetables", "meat", "bread", "sweets"],
+    sentence: "Fresh ___ are the main ingredient in most salads.",
+    options: ["vegetables", "chips", "cookies", "sausages"],
     correctWord: "vegetables",
   },
   {
-    sentence: "Smoothies are made with ___ fruits.",
-    options: ["blended", "fried", "baked", "roasted"],
-    correctWord: "blended",
+    sentence: "___ are often made with fruit and yogurt.",
+    options: ["smoothies", "pizzas", "burgers", "fries"],
+    correctWord: "smoothies",
   },
   {
-    sentence: "Grilled chicken is a ___ option.",
-    options: ["healthy", "unhealthy", "fried", "sweet"],
-    correctWord: "healthy",
+    sentence: "___ is a lean source of protein commonly eaten in healthy diets.",
+    options: ["chicken", "bacon", "ham", "steak"],
+    correctWord: "chicken",
   },
   {
-    sentence: "Avocados are ___ and full of nutrients.",
-    options: ["creamy", "crispy", "bitter", "dry"],
-    correctWord: "creamy",
+    sentence: "___ are rich in healthy fats and great in salads.",
+    options: ["avocados", "candies", "noodles", "crackers"],
+    correctWord: "avocados",
   },
   {
-    sentence: "Oatmeal is a ___ breakfast choice.",
-    options: ["nutritious", "unhealthy", "fried", "sweet"],
-    correctWord: "nutritious",
+    sentence: "___ is a warm, fiber-rich food for breakfast.",
+    options: ["oatmeal", "cake", "toast", "pastry"],
+    correctWord: "oatmeal",
   },
 ];
 

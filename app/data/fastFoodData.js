@@ -1,28 +1,28 @@
 const fastFood = [
   {
-    sentence: "Burgers are often served with ___.",
-    options: ["fries", "rice", "pasta", "bread"],
+    sentence: "You can get a ___ at a burger joint.",
+    options: ["burger", "lettuce", "salt", "tray"],
+    correctWord: "burger",
+  },
+  {
+    sentence: "A ___ is usually topped with cheese and pepperoni.",
+    options: ["pizza", "spoon", "napkin", "plate"],
+    correctWord: "pizza",
+  },
+  {
+    sentence: "People often eat a ___ at baseball games.",
+    options: ["hot dog", "fork", "apple", "cookie"],
+    correctWord: "hot dog",
+  },
+  {
+    sentence: "A ___ is a Mexican dish filled with meat and veggies.",
+    options: ["taco", "bowl", "soup", "bread"],
+    correctWord: "taco",
+  },
+  {
+    sentence: "___ are thin slices of potato fried in oil.",
+    options: ["fries", "carrots", "eggs", "cereal"],
     correctWord: "fries",
-  },
-  {
-    sentence: "Pizza is usually ___ with cheese and toppings.",
-    options: ["covered", "empty", "plain", "dry"],
-    correctWord: "covered",
-  },
-  {
-    sentence: "Hot dogs are served in a ___ bun.",
-    options: ["soft", "hard", "crispy", "dry"],
-    correctWord: "soft",
-  },
-  {
-    sentence: "Tacos are ___ and filled with meat or veggies.",
-    options: ["folded", "flat", "round", "square"],
-    correctWord: "folded",
-  },
-  {
-    sentence: "French fries are ___ and salty.",
-    options: ["crispy", "soft", "bitter", "sweet"],
-    correctWord: "crispy",
   },
 ];
 

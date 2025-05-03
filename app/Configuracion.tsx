@@ -161,9 +161,7 @@ const ProfileScreen = () => {
 
       {/* Sección idioma */}
       <View style={styles.section}>
-        <Text style={styles.header}>Ajustes</Text>
-        <Text style={styles.label}>Nivel de idioma</Text>
-        <Text style={styles.value}>Principiante</Text>
+        
       </View>
     </View>
   );
