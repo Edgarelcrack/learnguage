@@ -1,9 +1,10 @@
+
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { auth, db } from "../firebaseconfig"; 
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../firebaseconfig";
+import { doc, getDoc } from "firebase/firestore";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -19,13 +20,10 @@ const ProfileScreen = () => {
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             const data = docSnap.data();
-
-            // Lógica de racha
-            const updatedData = await calculateStreak(data);
-            const learnedWords = data.learnedWords || {}; 
+            const learnedWords = data.learnedWords || {};
             const totalWords = Object.keys(learnedWords).length;
             data.nivel = determineLanguageLevel(totalWords);
-            setUserData(updatedData); 
+            setUserData(data);
           } else {
             console.log("No hay datos del usuario en Firestore.");
           }
@@ -38,12 +36,6 @@ const ProfileScreen = () => {
     };
 
     loadUserData();
-
-    const intervalId = setInterval(() => {
-      loadUserData();
-    }, 10000);
-
-    return () => clearInterval(intervalId);
   }, []);
 
   const determineLanguageLevel = (totalWords: number): string => {
@@ -51,45 +43,6 @@ const ProfileScreen = () => {
     if (totalWords >= 10 && totalWords < 20) return "Casual";
     if (totalWords >= 20 && totalWords < 30) return "Experimentado";
     return "Avanzado";
-  };
-
-  // Lógica de rachas
-  const calculateStreak = async (data: any) => {
-    const today = new Date().toISOString().split("T")[0]; 
-    const lastLogin = data.lastLogin || today; 
-    let rachaActual = data.rachaActual || 0;
-    let mejorRacha = data.mejorRacha || 0;
-
-    if (lastLogin === today) {
-      return data;
-    }
-
-    const lastDate = new Date(lastLogin);
-    const diffDays = Math.floor((new Date(today).getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 1) {
-      rachaActual += 1;
-      mejorRacha = Math.max(mejorRacha, rachaActual);
-    } else if (diffDays > 1) {
-      rachaActual = 0;
-    }
-
-    const user = auth.currentUser;
-    if (user) {
-      try {
-        const docRef = doc(db, "users", user.uid);
-        await updateDoc(docRef, {
-          rachaActual,
-          mejorRacha,
-          lastLogin: today,
-        });
-        console.log("Datos actualizados correctamente en Firestore");
-      } catch (error) {
-        console.error("Error al actualizar datos en Firestore:", error);
-      }
-    }
-
-    return { ...data, rachaActual, mejorRacha, lastLogin: today };
   };
 
   if (loading) {
@@ -104,15 +57,16 @@ const ProfileScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.profileText}>Perfil</Text>
-        <TouchableOpacity 
-          style={styles.settingsButton} 
-          onPress={() => navigation.navigate("Configuracion" as never)}>
+        <TouchableOpacity
+          style={styles.settingsButton}
+          onPress={() => navigation.navigate("Configuracion" as never)}
+        >
           <Ionicons name="settings-outline" size={24} color="white" />
         </TouchableOpacity>
       </View>
       <View style={styles.profileContainer}>
         <Image
-          source={{ uri: userData?.foto || "https://via.placeholder.com/50" }} 
+          source={{ uri: userData?.foto || "https://via.placeholder.com/50" }}
           style={styles.profileImage}
         />
       </View>
@@ -121,8 +75,8 @@ const ProfileScreen = () => {
         <InfoRow label="Correo" value={userData?.email || "No disponible"} />
         <InfoRow label="Edad" value={userData?.age || "No disponible"} />
         <InfoRow label="Nivel de idioma" value={userData?.nivel || "No disponible"} />
-        <InfoRow label="Racha actual" value={`${userData?.rachaActual || 0}`} />
-        <InfoRow label="Mejor racha" value={`${userData?.mejorRacha || 0}`} />
+        <InfoRow label="Sesiones iniciadas" value={`${userData?.sessionStreak || 0}`} />
+
       </View>
     </View>
   );
